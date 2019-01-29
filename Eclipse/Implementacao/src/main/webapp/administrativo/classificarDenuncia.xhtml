@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/template/layout.xhtml" 
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="titulo">Gerenciar Denúncias</ui:define>
+    <ui:define name="conteudo">
+        <h:form class="conteudo" id="formulario">
+            <p:dataTable reflow="true" emptyMessage="Nenhuma denúncia foi encontrada." paginator="true" rows="20" var="indice"
+                         value="#{classificarDenunciaBean.listaDenuncias}" paginatorPosition="bottom" paginatorAlwaysVisible="false">
+                <p:column headerText="Protocolo" sortBy="">
+                    <h:outputText value="#{indice.idDenuncia}" />
+                </p:column>
+
+                <p:column headerText="Data" sortBy="" style="text-align: center">
+                    <h:outputText value="#{classificarDenunciaBean.dataDenuncia(indice)}" >
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="Logradouro" sortBy="">
+                    <h:outputText value="#{indice.local.endereco.logradouro}" />
+                </p:column>
+
+                <p:column headerText="Cidade" sortBy="">
+                    <h:outputText value="#{indice.local.endereco.cidade}" />
+                </p:column>
+
+                <p:column headerText="Latitude" sortBy="">
+                    <h:outputText value="#{indice.local.latitude}" />
+                </p:column>
+
+                <p:column headerText="Longitude" sortBy="">
+                    <h:outputText value="#{indice.local.latitude}" />
+                </p:column>
+                <p:column headerText ="Definir Prioridade" width="70" class="coluna-acoes">
+                    <p:commandButton value="DP" process="@this" onclick="PF('dialogoAdministrativo').show()"  update="formulario:informacoesAdministrativo formulario:tituloAdministrativo" >
+                        <f:setPropertyActionListener target="#{classificarDenunciaBean.denunciaSelecionada}" value="#{indice}" />
+                    </p:commandButton>
+                </p:column>
+                <p:column headerText ="Alterar Status" width="70" class="coluna-acoes">
+                    <p:commandButton value="AS" process="@this" onclick="PF('dialogoOperacional').show()"  update="formulario:informacoesOperacional formulario:tituloOperacional" >
+                        <f:setPropertyActionListener target="#{classificarDenunciaBean.denunciaSelecionada}" value="#{indice}" />
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+
+            <p:dialog widgetVar="dialogoAdministrativo" id="dialogoAdministrativo" modal="true" responsive="true" resizable="false" >
+                <f:facet name="header">
+                    <h:outputText id="tituloAdministrativo" value="Protocolo da denúncia: #{classificarDenunciaBean.denunciaSelecionada.idDenuncia}" />
+                </f:facet>
+                <p:panel id="informacoesAdministrativo">
+                    <div class="ui-grid ui-grid-responsive ui-fluid">
+                        <div class="ui-g-12 ui-md-12 ui-lg-12">
+                            <h:outputText value="Número pessoas que endossaram a denúncia:" styleClass="rotulo"/> 2
+                        </div>
+                        <div class="ui-grid-row">
+                            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                                <p:inputTextarea value="#{classificarDenunciaBean.denunciaSelecionada.descricao}" disabled="true"/>
+                            </div>
+                        </div>
+                        <div class="ui-grid-row">
+                            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                                <p:separator />
+                            </div>
+                        </div>
+                        <div class="ui-grid-row">
+                            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                                <p:outputLabel for="consideracoes" value="Relato técnico" styleClass="rotulo"/>
+                                <p:inputTextarea id="consideracoes" styleClass="campoEntrada" style="margin-bottom: 10px;" value="#{classificarDenunciaBean.relatoTecnico}"/>
+                            </div>
+                        </div>
+                        <div class="ui-grid-row">
+                            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                                <p:outputLabel for="opcao"  value="Definir nível da denúncias" styleClass="rotulo"/>
+                                <p:selectOneMenu id="opcao" value="#{classificarDenunciaBean.prioridade}" styleClass="campoEntrada" required="true" >
+                                    <f:selectItem itemLabel="Selecione uma opção    " itemValue=""/>
+                                    <f:selectItem itemLabel="Baixa" itemValue="5" />
+                                    <f:selectItem itemLabel="Média" itemValue="15" />
+                                    <f:selectItem itemLabel="Alta" itemValue="30" />
+                                </p:selectOneMenu>
+                            </div>
+                        </div>                    
+                        <div class="ui-grid-row">
+                            <div class="ui-g-12 ui-md-6 ui-lg-6">
+                            </div>
+                            <div class="ui-g-12 ui-md-6 ui-lg-6">
+                                <p:commandButton value="Submeter" icon="fa fa-close" process="dialogoAdministrativo" oncomplete="PF('dialogoAdministrativo').hide()" action="#{classificarDenunciaBean.classificaDenuncia}">
+                                    <f:setPropertyActionListener target="#{classificarDenunciaBean.status}" value="4" />                                
+                                </p:commandButton>
+                            </div>
+                        </div>
+                    </div>
+                </p:panel>
+            </p:dialog>
+
+            <p:dialog widgetVar="dialogoOperacional" modal="true" responsive="true" resizable="false" id="dialogoOperacional">
+                <f:facet name="header">
+                    <h:outputText id="tituloOperacional" value="Protocolo da denúncia: #{classificarDenunciaBean.denunciaSelecionada.idDenuncia}"/>
+                </f:facet>
+                <p:panel id="informacoesOperacional">
+                    <div class="ui-grid ui-grid-responsive ui-fluid">
+                        <div class="ui-grid-row">
+                            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                                <p:inputTextarea value="#{classificarDenunciaBean.denunciaSelecionada.descricao}" disabled="true" id="teste" />
+                            </div>
+                        </div>
+                        <div class="ui-grid-row">
+                            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                                <p:separator />
+                            </div>
+                        </div>
+                        <div class="ui-grid-row">
+                            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                                <p:outputLabel for="consideracoesOp" value="Relato técnico" styleClass="rotulo"/>
+                                <p:inputTextarea id="consideracoesOp" styleClass="campoEntrada" value="#{classificarDenunciaBean.relatoTecnico}" style="margin-bottom: 10px;" />
+                            </div>
+                        </div>
+                        <div class="ui-grid-row">
+                            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                                <p:outputLabel for="opcaoOp" value="Status atual: #{classificarDenunciaBean.statusDenuncia()} " styleClass="rotulo"/>
+                                <p:selectOneMenu id="opcaoOp" value="#{classificarDenunciaBean.status}" styleClass="campoEntrada" required="true" >
+                                    <f:selectItem itemLabel="Selecione uma opção    " itemValue=""/>
+                                    <f:selectItem itemLabel="Aprovada" itemValue="APROVADA" />
+                                    <f:selectItem itemLabel="Reprovada" itemValue="REPROVADA" />
+                                    <f:selectItem itemLabel="Em andamento" itemValue="EM_ANDAMENTO" />
+                                    <f:selectItem itemLabel="Atendida" itemValue="ATENDIDA" />
+                                    <f:selectItem itemLabel="Cancelada" itemValue="CANCELADA" />
+                                </p:selectOneMenu>
+                            </div>
+                        </div>
+                        <div class="ui-grid-row">
+                            <div class="ui-g-12 ui-md-6 ui-lg-6">
+                            </div>
+                            <div class="ui-g-12 ui-md-6 ui-lg-6">
+                                <p:commandButton value="Alterar" process="dialogoOperacional" icon="fa fa-check" action="#{classificarDenunciaBean.executarAlteracaoDenuncia()}" oncomplete="PF('dialogoOperacional').hide()" update="@form" />
+                            </div>
+                        </div>
+                    </div>
+                </p:panel>
+            </p:dialog>
+        </h:form>
+    </ui:define>
+</ui:composition>
+
+

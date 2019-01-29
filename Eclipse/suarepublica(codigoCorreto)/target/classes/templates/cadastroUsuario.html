@@ -1,0 +1,107 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html class="no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Cadastro</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" th:href="@{apple-icon.png}">
+    <link rel="shortcut icon" th:href="@{favicon.ico}">
+
+    <link rel="stylesheet" th:href="@{assetslogin/css/normalize.css}">
+    <link rel="stylesheet" th:href="@{assetslogin/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{assetslogin/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{assetslogin/css/bootstrap/css/themify-icons.css}">
+    <link rel="stylesheet" th:href="@{assetslogin/css/flag-icon.min.css}">
+    <link rel="stylesheet" th:href="@{assetslogin/css/cs-skin-elastic.csss}">
+    <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
+    <link rel="stylesheet" th:href="@{assetslogin/scss/style.css}">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+
+</head>
+<body class="">
+
+
+    <div class="sufee-login d-flex align-content-center flex-wrap" style="background-image: url(assets/img/seguroRoxo.png) ; background-repeat:no-repeat;  background-position: center top; background-size: cover;background-color: #632596">
+        <div class="container">
+            <div class="login-content" style="margin-top: 23px; margin-bottom: 23px;">
+                <div class="login-form">
+                <div class="login-logo">
+                        <img class="align-content" th:src="@{images/logo.png}" alt="" style="max-width:30%; height=auto;">
+                </div>
+                    <form th:action="@{/registro}" method="post" th:object="${user}">
+                        <div class="form-group">
+                            <label><b>Nome do usuário:</b></label>
+                            <input th:field="*{nome}" type="text" class="form-control" placeholder="Seu nome">
+                        	<label style="font-size: 20; color: #FF1C19;" class="validation-message" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"> Favor preencher esse campo.</label>
+                        </div>
+                <div class="row form-group">
+			      <div class="col-lg-6">
+			      <label><b>Data de nascimento:</b></label>
+			      <input th:field="*{dataNascimento}"type="date" class="form-control" placeholder="Data de nascimento">
+				  <label style="font-size: 20; color: #FF1C19;" class="validation-message" th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dataNascimento}">Favor preencher esse campo.</label>
+			      </div>
+			      <div class="col-lg-6">
+			      <label><b>Sexo:</b></label>
+			      
+			      <div>	
+				      <label class="radio-inline" style="padding-right:10px" th:each="sexo: ${sexos}">
+				      <input type="radio" th:field="*{sexo}" th:value="${sexo}" style="margin-right:5px;" checked> 
+				      <label th:for="${#ids.prev('sexo')}" th:text="#{|sexo.${sexo}|}"></label>
+				      </label>
+				     
+			      </div>
+				  <label style="font-size: 20; color: #FF1C19;" class="validation-message" th:if="${#fields.hasErrors('sexo')}" th:errors="*{sexo}"></label>
+			      </div>
+			    </div>
+			    <div class="row  form-group">
+			      <div class="col-lg-6">
+			      <label><b>Endereço de e-mail:</b></label>
+			      <input th:field="*{email}"type="email" class="form-control" placeholder="Endereço de e-mail">
+				  <label style="font-size: 20; color: #FF1C19;" class="validation-message" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">E-mail já cadastrado.</label>
+			      </div>
+			      <div class="col-lg-6">
+			      <label><b>Confirmar e-mail:</b></label>
+			      <input type="email" name="confirmarEmail" id="confirmarEmail" class="form-control" placeholder="Confirme o e-mail">
+				  </div>
+			    </div>
+                <div class="row form-group">
+			      <div class="col-lg-6">
+			      <label><b>Senha:</b></label>
+			      <input th:field="*{senha}"type="password" class="form-control" placeholder="Senha">
+				  <label style="font-size: 20; color: #FF1C19;" class="validation-message" th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}">Favor preencher esse campo.</label>
+			      </div>
+			      <div class="col-lg-6">
+			      <label><b>Confirmar senha:</b></label>
+			      <input type="password" name="confirmarSenha" id="confirmarSenha" class="form-control" placeholder="Confirme a senha">
+				   </div>
+			    </div>
+            
+                        <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30" style="background-color:#632596;color:#ffffff; font-weight: bold" >Registre-se</button>
+                        <div class="register-link m-t-15 text-center">
+                            <p>Já tem uma conta? <a th:href="@{/login}" style="color:#632596"> Log in</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script th:src="@{assetslogin/js/vendor/jquery-2.1.4.min.js}"></script>
+    <script th:src="@{assetslogin/js/popper.min.js}"></script>
+    <script th:src="@{assetslogin/js/plugins.js}"></script>
+    <script th:src="@{assetslogin/js/main.js}"></script>
+
+
+</body>
+</html>

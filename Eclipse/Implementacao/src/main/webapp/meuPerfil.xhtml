@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/template/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="titulo">Perfil</ui:define>
+    <ui:define name="conteudo">
+        <h:form class="conteudo">
+            <div class="ui-grid ui-grid-responsive">
+                <div class="ui-row">
+                    <div class="ui-g-12 ui-md-6 ui-lg-6">
+                        <center>
+                            <p:graphicImage library="img" name="usuario.jpg" width="200" alt="Foto Usuário" style="margin-bottom: 20px;" />
+                            <br/>
+                            <p:fileUpload label="Trocar imagem do perfil" mode="simple" skinSimple="true" />
+                        </center>
+                    </div>
+                    <div class="ui-g-12 ui-md-6 ui-lg-6">
+                        <div class="ui-g-12 ui-md-12 ui-lg-12">
+                            <p:outputLabel value="Tipo da conta: " for="tipoConta" class="rotulo"/>
+                            <h:outputText id="tipoConta" value="#{seguranca.usuario.tipoUsuario}" class="campoEntrada" />
+                        </div>
+                        <div class="ui-g-12 ui-md-12 ui-lg-12">
+                            <p:outputLabel value="Nome: " for="nome" class="rotulo"/>
+                            <h:outputText id="nome" value="#{seguranca.usuario.nome}" class="campoEntrada" />
+                        </div>
+                        <div class="ui-g-12 ui-md-12 ui-lg-12">
+                            <p:outputLabel value="CPF: " for="cpf" class="rotulo"/>
+                            <h:outputText id="cpf" value="#{seguranca.usuario.cpf}" class="campoEntrada" />
+                        </div>
+                        <div class="ui-g-12 ui-md-12 ui-lg-12">
+                            <p:outputLabel value="Email: " for="email" class="rotulo"/>
+                            <h:outputText id="email" value="#{seguranca.usuario.email}" class="campoEntrada" />
+                        </div>
+                        <div class="ui-g-12 ui-md-12 ui-lg-12">
+                            <p:outputLabel value="Telefone: " for="telefone" class="rotulo"/>
+                            <h:outputText id="telefone" value="#{seguranca.usuario.telefone}" class="campoEntrada" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

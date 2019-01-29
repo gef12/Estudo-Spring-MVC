@@ -1,0 +1,89 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+
+<html class="no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Log In - SuaRepublica</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="apple-touch-icon" href="apple-icon.png}">
+<link rel="shortcut icon" href="favicon.ico}">
+
+<link rel="stylesheet" th:href="@{assetslogin/css/normalize.css}">
+<link rel="stylesheet" th:href="@{assetslogin/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{assetslogin/css/font-awesome.min.css}">
+<link rel="stylesheet" th:href="@{assetslogin/css/themify-icons.css}">
+<link rel="stylesheet" th:href="@{assetslogin/css/flag-icon.min.css}">
+<link rel="stylesheet" th:href="@{assetslogin/css/cs-skin-elastic.css}">
+<!-- <link rel="stylesheet" th:href="assets/css/bootstrap-select.less"> -->
+<link rel="stylesheet" th:href="@{assetslogin/scss/style.css}">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800"
+	rel='stylesheet' type='text/css'>
+
+<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+
+</head>
+<body class="">
+
+ 
+	<div class="sufee-login d-flex align-content-center flex-wrap" style=" background-image: url(assets/img/seguroRoxo.png) ; background-repeat:no-repeat;  background-position: center top; background-size: cover;background-color: #632596">
+		<div class="container">
+			<div class="login-content" style="margin-top: 27px; margin-bottom: 27px;">
+				
+				<div class="login-form">
+				
+				<div align="center">
+				  <div class="login-logo">
+				    <img class="align-content" th:src="@{images/logo.png}" alt="" style="max-width:50%; height=auto;">
+				    </div>
+							<p style="font-size: 20; color: #FF1C19;" th:if="${param.error}">E-mail ou senha incorretos! Por favor verifique.</p>
+							<p style="font-size: 20; color: #00FF00;" th:if="${MensagemSucesso}" th:text="${MensagemSucesso}">E-mail ou senha incorretos! Por favor verifique.</p>
+							<p style="font-size: 20; color: #00FF00;" th:if="${MensagemSucessoCadastro}" th:text="${MensagemSucessoCadastro}">E-mail ou senha incorretos! Por favor verifique.</p>
+				</div>
+						
+					<form th:action="@{/login}"  method="POST">
+						
+						<div class="form-group">
+							<label><b>E-mail:</b></label> <input type="email" id="username" name="username"
+								class="form-control" placeholder="Seu e-mail de usuário">
+						</div>
+						<div class="form-group">
+							<label><b>Senha:</b></label> <input type="password" id="password"
+								name="password" class="form-control" placeholder="Sua senha">
+						</div>
+
+						<input type="submit" name="submit" value="Login" 
+							class="btn btn-flat m-b-30 m-t-30" style="background-color: #632596; color:#FFFFFF; font-weight: bold;">
+					</form>
+					<div class="register-link m-t-15 text-center">
+							<p>
+								Ainda não tem uma conta? <a th:href="@{/registro}" style="color: #632596;">Registre-se aqui</a>
+							</p>
+							<p style="margin-bottom: 3px">
+								Esqueceu a senha? <a th:href="@{/recuperarSenha}" style="color: #632596;">Recupere aqui</a>
+							</p>
+						</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script th:src="@{assetslogin/js/vendor/jquery-2.1.4.min.js}"></script>
+	<script th:src="@{assetslogin/js/popper.min.js}"></script>
+	<script th:src="@{assetslogin/js/plugins.js}"></script>
+	<script th:src="@{assetslogin/js/main.js}"></script>
+
+
+</body>
+</html>

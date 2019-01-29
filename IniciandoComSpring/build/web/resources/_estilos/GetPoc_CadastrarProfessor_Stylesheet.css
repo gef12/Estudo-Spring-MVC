@@ -1,0 +1,187 @@
+@charset "utf-8";
+/* CSS Document */
+
+/**Área da página**/
+
+.bloco{
+	position: absolute;
+	width: 37.5%;
+	height: auto;
+	top: 132px;
+	left: 75px;
+	transition: all .2s linear;
+}
+
+.bloco h1{
+	font-family: abel;
+	font-size: 24px;
+	padding-bottom: 10px;
+}
+
+.bloco h2{
+	font-family: abel;
+	font-size: 18px;
+	padding: 5px;
+}
+
+.bloco h3{
+	font-family:abel;
+	font-size: 16px;
+}
+
+.text{
+	width: 98%;
+	font-family:abel;
+	color: black;
+	font-size: 18px;
+	border: 0 none;
+	border-radius: 5px;
+	background-color: rgba(229,229,229,1);
+	margin-bottom: 5px;
+}
+
+
+#menu:checked ~ .bloco{
+	transform: translatex(200px);
+}
+
+.bloco1{
+	position: absolute;
+	width: 37.5%;
+	height: auto;
+	top: 132px;
+	left: 45%;
+	transition: all .2s linear;
+	padding-top: 42px;
+}
+
+.bloco1 h1{
+	font-family: abel;
+	font-size: 24px;
+	padding-bottom: 10px;
+}
+
+.bloco1 h2{
+	font-family: abel;
+	font-size: 18px;
+	padding: 5px;
+}
+
+.bloco1 input{
+	width: 98%;
+	font-family:abel;
+	color: black;
+	font-size: 18px;
+	border: 0 none;
+	border-radius: 5px;
+	margin-bottom: 5px;
+	background-color: rgba(229,229,229,1);
+}
+
+
+#menu:checked ~ .bloco1{
+	transform: translatex(200px);
+}
+
+.bloco2{
+	position: absolute;
+	width: 77%;
+	height: 100px;
+	top: 365px;
+	left: 75px;
+	transition: all .2s linear;
+}
+
+.bloco2 h1{
+	font-family: abel;
+	font-size: 24px;
+	padding-bottom: 10px;
+}
+
+.bloco2 h2{
+	font-family: abel;
+	font-size: 18px;
+	padding: 5px;
+}
+
+.bloco2 textarea{
+	width: 99%;
+	font-family:abel;
+	color: black;
+	font-size: 18px;
+	border: 0 none;
+	border-radius: 5px;
+	margin-bottom: 5px;
+	resize: none;
+	background-color: rgba(229,229,229,1);
+}
+
+#menu:checked ~ .bloco2{
+	transform: translatex(200px);
+}
+
+.bloco3{
+	position: absolute;
+	width: 77%;
+	height: auto;
+	top: 472px;
+	left: 75px;
+	transition: all .2s linear;
+	padding-bottom: 20px;
+}
+
+button{
+	width: 150px;
+	height: 55px;
+	font-family: Arial;
+	font-size: 22px;
+        background-color: rgba(198, 40, 40, 1);
+	color: white;
+	border: 0 none;
+	border-radius:7px;
+	margin-left: 45%;
+	cursor: pointer;
+        padding-bottom: 10px;
+        text-align: center;
+        vertical-align: middle;
+        padding-top: 10px;
+}
+.bloco3 h3{
+	font-family: abel;
+	font-size: 16px;
+	padding: 5px;
+}
+
+#menu:checked ~ .bloco3{
+	transform: translatex(200px);
+}
+
+
+@media(max-width:960px){
+	.bloco{
+		width: 80%;
+	}
+	.bloco1{
+		width: 80%;
+		left: 75px;
+		top: 360px;
+		padding-top: 0;
+	}
+	.bloco2{
+		width: 80%;
+		top: 550px;
+	}
+	.bloco3{
+		width: 80%;
+		top: 600px;
+	}
+	.bloco3 input{
+		margin-left:35.5%;
+	}
+        button{
+            margin-left: 150px;
+            height: 45px;
+            width: 140px;
+            font-size: 20px;
+        }
+}

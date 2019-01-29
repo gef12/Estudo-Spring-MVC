@@ -1,0 +1,7 @@
+br\com\iniciando\dao\CadastroDAO.class
+conexao\Conexao.class
+br\com\iniciando\dominio\Cadastro_.class
+br\com\iniciando\controller\IniciandoController.class
+br\com\iniciando\dominio\Cadastro.class
+br\com\iniciando\dominio\Cliente.class
+br\com\iniciando\dao\Teste.class

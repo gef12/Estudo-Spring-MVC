@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <f:facet name="first">
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        </f:facet>
+        
+        <title>Login</title>
+
+        <h:outputStylesheet library="css" name="layout.css" />
+        <h:outputStylesheet library="css" name="components.css" />
+    </h:head>
+    <h:body class="login">
+        <f:metadata>
+            <f:viewParam name="dummy" />
+            <f:event listener="#{loginBean.preRender}" type="preRenderView" />
+        </f:metadata>
+        <h:form prependId="false" id="frm">
+            <div class="centralizado">
+                <p:graphicImage library="img" name="logoLogin.png"/>
+                <p:messages autoUpdate="true" closable="true"/>
+                <div class="ui-grid ui-grid-responsive" style="margin-top: 20px;">
+                    <div class="ui-grid-row">
+                        <div class="ui-g-12 ui-md-12 ui-lg-12">
+                            <p:inputText placeholder="Usuário" value="#{loginBean.usuario}" id="j_username" maxlength="50" required = "true" requiredMessage ="O campo usuário é obrigatório"/>
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-g-12 ui-md-12 ui-lg-12">
+                            <p:password placeholder="Senha" id="j_password" maxlength="50" required = "true" requiredMessage ="O campo senha é obrigatório" autocomplete="off"/>
+                        </div>
+                    </div>
+                     <p:link value="Esqueci minha senha" outcome="recuperarSenha.xhtml"/>
+
+                    <div class="ui-grid-row">
+                        <div class="ui-g-12 ui-md-12 ui-lg-12">
+                             <p:commandButton value="Entrar" styleClass="botao" action="#{loginBean.login}" ajax="false" /> 
+                        </div>
+                    </div>
+                </div>
+                <br/>
+         <!--       Ainda não é cadastrado? <p:link value="Clique aqui" outcome="cadastroCidadao.xhtml"/> -->
+            </div>
+        </h:form>   
+    </h:body>
+</html>

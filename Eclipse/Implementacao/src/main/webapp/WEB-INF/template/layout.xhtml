@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <f:facet name="first">
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        </f:facet>
+
+        <title><ui:insert name="titulo"/></title>
+
+        <h:outputStylesheet library="css" name="custom.css" />
+        <h:outputStylesheet library="css" name="layout.css" />
+        <h:outputStylesheet library="css" name="components.css" />
+
+        <h:outputScript target="body" library="primefaces" name="jquery/jquery.js" />
+        <h:outputScript target="body" library="js" name="app.js" />
+        <script src="http://maps.google.com/maps/api/js?key=AIzaSyDcrwO8RkDBAcZYXeOfnMY1lgbUJSCz8UI"/>
+        <a href="layout.xhtml"></a>
+    </h:head>
+
+    <h:body>
+        <p:ajaxStatus onstart="PF('carregando').show();" onsuccess="PF('carregando').hide();"/>
+        <p:dialog widgetVar="carregando" modal="true" showHeader="false" resizable="false" responsive="true">
+            <p:graphicImage library="img" name="process.gif" style="width: 35px;" />
+        </p:dialog>
+
+        <header class="aw-topbar">
+            <h:link outcome="/index.xhtml"><h:graphicImage library="img" name="logo.png" width="100" /></h:link>
+
+            <a href="#" class="aw-toggle  js-toggle" style="text-decoration: none !important" title="Menu"><i class="fa  fa-bars"></i></a>
+        </header>
+
+        <aside class="aw-sidebar  js-sidebar">
+            <div class="dadosUsuario">
+                <p:graphicImage library="img" name="usuario.jpg" width="150" style="margin-top: 5px;" />
+                <br/>
+                <p:link value="Olá #{seguranca.usuario.nome}" outcome="/meuPerfil.xhtml" style="text-decoration: none;"/>
+            </div>
+            <nav class="aw-menu">
+                <ul>
+                    <li class="#{controlePaginasBean.getItemCssClass('index')}">
+                        <p:link outcome="/index.xthml"><i class="fa  fa-fw  fa-home"></i>Página Inicial</p:link>
+                    </li>
+                    <!-- FUNCIONALIDADE DISPONÍVEIS PARA O USUÁRIO DO TIPO CIDADÃO -->
+                    <p:outputPanel rendered="#{controlePaginasBean.isCidadao()}">
+                        <li class="#{controlePaginasBean.getItemCssClass('cidadao/realizarDenuncia')}">
+                            <p:link outcome="/cidadao/realizarDenuncia.xhtml"><i class="fa  fa-fw  fa-thumb-tack"></i>Realizar Denúncia</p:link>
+                        </li>
+                    </p:outputPanel>
+                    <p:outputPanel rendered="#{controlePaginasBean.isCidadao()}">
+                        <li class="#{controlePaginasBean.getItemCssClass('cidadao/minhasDenuncias')}">
+                            <p:link outcome="/cidadao/minhasDenuncias.xhtml"><i class="fa  fa-fw  fa-bullseye"></i>Minhas Denúncias</p:link>
+                        </li>
+                    </p:outputPanel>
+                    <p:outputPanel rendered="#{controlePaginasBean.isCidadao()}">
+                        <li class="#{controlePaginasBean.getItemCssClass('cidadao/denunciasPublicas')}">
+                            <p:link outcome="/cidadao/denunciasPublicas.xhtml"><i class="fa  fa-fw  fa-comment"></i>Denúncias Públicas</p:link>
+                        </li>
+                    </p:outputPanel>
+                     <!-- FUNCIONALIDADE DISPONÍVEIS PARA O USUÁRIO DO TIPO OPERACIONAL -->
+                    <p:outputPanel rendered="#{controlePaginasBean.isAgenteOperacional()}">
+                        <li class="#{controlePaginasBean.getItemCssClass('operacional/validarDenuncia')}">
+                            <p:link outcome="/operacional/validarDenuncia.xhtml"><i class="fa  fa-fw  fa-check-circle"></i>Validar Denúncia</p:link>
+                        </li>
+                    </p:outputPanel>
+                    <!-- FUNCIONALIDADE DISPONÍVEIS PARA O USUÁRIO DO TIPO ADMINISTRATIVO -->
+                    <p:outputPanel rendered="#{controlePaginasBean.isAgenteAdministrativo()}">
+                        <li class="#{controlePaginasBean.getItemCssClass('administrativo/classificarDenuncia')}">
+                            <p:link outcome="/administrativo/classificarDenuncia.xhtml"><i class="fa  fa-fw  fa-sort"></i>Classificar Denúncias</p:link>
+                        </li>
+                    </p:outputPanel>
+                    <p:separator/>
+                    <li>
+                        <p:link href="/j_spring_security_logout"><i class="fa  fa-fw  fa-arrow-circle-left"></i>Sair</p:link>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="aw-rodape">
+                <nav class="aw-menu">
+
+                </nav>
+            </div>
+
+            <div class="aw-duvida">
+               <!-- Alguma dúvida? <h:link value="Clique aqui" outcome="formulario.xhtml" /> -->
+            </div>
+        </aside>
+
+        <section class="aw-content  js-content">
+            <h1 class="aw-page-title"><ui:insert name="titulo"/></h1>
+            <ui:insert name="conteudo"/>
+        </section>
+
+    </h:body>
+
+</html>

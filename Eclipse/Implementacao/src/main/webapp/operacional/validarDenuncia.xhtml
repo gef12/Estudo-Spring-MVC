@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/template/layout.xhtml" 
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="titulo">Classificar Denúncias</ui:define>
+    <ui:define name="conteudo">
+        <h:form class="conteudo" id="formulario">
+            <p:dataTable reflow="true" emptyMessage="Nenhuma denúncia foi encontrada." paginator="true" rows="20" 
+                         value="#{validarDenunciaBean.listaDenuncias}" var="indice" paginatorPosition="bottom" paginatorAlwaysVisible="false">
+                <p:column headerText="Protocolo" sortBy="">
+                    <h:outputText value="#{indice.idDenuncia}"/>
+
+                </p:column>
+
+                <p:column headerText="Data" sortBy="">
+                    <h:outputText value="#{validarDenunciaBean.dataDenuncia(indice)}" >
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="Logradouro" sortBy="">
+                    <h:outputText value="#{indice.local.endereco.logradouro}" />
+                </p:column>
+                
+                <p:column headerText="Bairro" sortBy="">
+                    <h:outputText value="#{indice.local.endereco.bairro}" />
+                </p:column>
+
+                <p:column headerText="Cidade" sortBy="">
+                    <h:outputText value="#{indice.local.endereco.cidade}" />
+                </p:column>
+
+                <p:column headerText="Latitude" sortBy="">
+                    <h:outputText value="#{indice.local.latitude}" />
+                </p:column>
+
+                <p:column headerText="Longitude" sortBy="">
+                    <h:outputText value="#{indice.local.longitude}" />
+                </p:column>
+                
+                <p:column headerText="Status" sortBy="">
+                    <h:outputText value="#{validarDenunciaBean.statusDenuncia(indice)}" />
+                </p:column>
+
+                <p:column width="70" class="coluna-acoes" headerText ="Classificar Denuncia">
+                    <p:commandButton icon="ui-icon-search" process="@this" onclick="PF('dialogoOperacional').show()" update="formulario:informacoes formulario:cabecalho" >
+                        <f:setPropertyActionListener target="#{validarDenunciaBean.denunciaSelecionada}" value="#{indice}" />
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+
+            <p:dialog widgetVar="dialogoOperacional" modal="true" responsive="true" resizable="false" id="dialogoOperacional">
+                <f:facet name="header">
+                    <h:outputText id="cabecalho" value="Protocolo da denúncia: #{validarDenunciaBean.denunciaSelecionada.idDenuncia}"/>
+                </f:facet>
+                <p:panel id="informacoes">
+                    <div class="ui-grid ui-grid-responsive ui-fluid">
+                        <div class="ui-grid-row">
+                            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                                <p:inputTextarea value="#{validarDenunciaBean.denunciaSelecionada.descricao}" disabled="true" id="teste" />
+                            </div>
+                        </div>
+                        <div class="ui-grid-row">
+                            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                                <p:separator />
+                            </div>
+                        </div>
+                        <div class="ui-grid-row">
+                            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                                <p:outputLabel for="consideracoes" value="Relato técnico" styleClass="rotulo"/>
+                                <p:inputTextarea id="consideracoes" styleClass="campoEntrada" value="#{validarDenunciaBean.relatoTecnico}" style="margin-bottom: 10px;" />
+                            </div>
+                        </div>
+                        <div class="ui-grid-row">
+                            <div class="ui-g-12 ui-md-6 ui-lg-6">
+                                <p:commandButton value="Aprovar" process="dialogoOperacional" icon="fa fa-check" action="#{validarDenunciaBean.executarAlteracaoDenuncia()}" oncomplete="PF('dialogoOperacional').hide()" update="@form">
+                                    <f:setPropertyActionListener target="#{validarDenunciaBean.status}" value="APROVADA" />
+                                </p:commandButton>
+                            </div>
+                            <div class="ui-g-12 ui-md-6 ui-lg-6">
+                                <p:commandButton value="Reprovar" process="dialogoOperacional" icon="fa fa-close" action="#{validarDenunciaBean.executarAlteracaoDenuncia()}" oncomplete="PF('dialogoOperacional').hide()" update="@form">
+                                    <f:setPropertyActionListener target="#{validarDenunciaBean.status}" value="REPROVADA" />
+                                </p:commandButton>
+                            </div>
+                        </div>
+                    </div>
+                </p:panel>
+            </p:dialog>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

@@ -1,0 +1,94 @@
+@charset "utf-8";
+/* CSS Document */
+
+/**Área da página**/
+
+.bloco{
+	position: absolute;
+	width: 37.5%;
+	height: auto;
+	top: 132px;
+	left: 75px;
+	transition: all .2s linear;
+}
+
+.bloco h1{
+	font-family: Abel;
+	font-size: 24px;
+	padding-bottom: 10px;
+}
+
+.bloco h2{
+	font-family: Abel;
+	font-size: 18px;
+	padding: 5px;
+}
+
+.bloco input{
+	width: 98%;
+	font-family:Abel;
+	color: black;
+	font-size: 18px;
+	border: 0 none;
+	border-radius: 5px;
+	background-color: rgba(229,229,229,1);
+	margin-bottom: 5px;
+}
+
+
+#menu:checked ~ .bloco{
+	transform: translatex(200px);
+}
+
+.bloco3{
+	position: absolute;
+	width: 77%;
+	height: auto;
+	top: 472px;
+	left: 35%;
+	transition: all .2s linear;
+	padding-bottom: 20px;
+}
+
+.bloco3 button{
+	width: 100px;
+	height: 50px;
+	font-family: Abel;
+	font-size: 2px;
+	background-color: rgba(183,15,10,1);
+	color: white;
+	border: 0 none;
+	border-radius:8px;
+	margin-top: 10px;
+	margin-left: 43.5%;
+	cursor: pointer;
+}
+
+#menu:checked ~ .bloco3{
+	transform: translatex(200px);
+}
+
+
+@media(max-width:960px){
+	.bloco{
+		width: 70%;
+	}
+	.bloco1{
+		width: 70%;
+		left: 75px;
+		top: 360px;
+		padding-top: 0;
+	}
+	.bloco2{
+		width: 70%;
+		top: 550px;
+	}
+	.bloco3{
+		width: 70%;
+		top: 500px;
+	}
+	.bloco3 button{
+		margin-left:35.5%;
+	}
+}
+

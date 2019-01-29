@@ -1,0 +1,155 @@
+@charset: "UTF-8";
+@import url('https://fonts.googleapis.com/css?family=Abel');
+
+body{
+	background-image: url(../_imagens/fundo_login.png);
+	background-repeat: no-repeat;
+}
+
+div.container{
+	position: relative;
+	background-color: rgba(255,255,255,.75);
+	width: 375px;
+	height: 500px;
+	border-radius: 20px;
+	box-shadow: 2px 2px 5px black;
+	margin: 4.5% auto;
+}
+
+figure.logo img{
+	position: relative;
+	margin: 12% 12% 0 auto;
+}
+
+figure.logo form{
+	position: relative;
+	margin: 6% auto;
+}
+
+.in{
+	position: relative;
+        background-color: #e5e5e5;
+	margin: 5% auto;
+	border-radius: 5px;
+	width: 97.5%;
+	height: 35px;
+	font-size:16px;
+	border-color: #c0c0c0;
+	border-style: solid;
+	color: black;
+	font-family: abel;
+	padding-left: 4pt;
+}
+
+button{
+        width: 175px;
+	height: 55px;
+	font-family: Arial;
+	font-size: 24px;
+        background-color: rgba(183, 15, 10, 1);
+	color: white;
+	border: 0 none;
+	border-radius:7px;
+	margin-top: 10px;
+	margin-left: 18%;
+	cursor: pointer;
+        padding-bottom: 10px;
+        text-align: center;
+        vertical-align: middle;
+        padding-top: 10px;
+}
+
+a.text{
+	position:relative;
+	color: black;
+	font-family: abel;
+	font-size: 16px;
+	text-align: center;
+	margin-left: 26.5%;
+}
+
+.error{
+	background-color: rgba(242, 222, 222, 1);
+	width: 79%;
+	top: 31%;
+	height: 5%;
+	position: absolute;
+}
+
+p.txt{
+	font-family: abel;
+	color: rgba(198,65,61,.90);
+	text-align:center;
+	font-size:16px;
+	margin-top: 2px;
+}
+
+spam.x1{
+	position: absolute;
+	background-color: rgba(198,40,40,.90);
+	color: white;
+	text-align-last: center;
+	margin-top: 1.25%;
+	margin-left: 1.5%;
+	height: 16px;
+	width: 16px;
+	border-radius: 40px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:14px;
+	padding-bottom: 1.25px;
+}
+
+spam.x2{
+	position: absolute;
+	width: 100%;
+	bottom: 7.5%;
+	text-align:right;
+	margin-right:5px;
+}
+
+a.close{
+	color: rgba(198,40,40,.90);
+	font-family: Arial, Helvetica, sans-serif;
+	text-decoration: none;
+	text-align: right;
+	margin-right: 5px;
+}
+
+@media(max-width:375px){
+    .container{
+        max-width: 290px;
+        max-height: 450px;
+    }
+    figure.logo img{
+        max-width: 200px;
+    }
+    figcaption{
+        margin-top: 40px;
+    }
+    button{
+        height: 45px;
+        width: 150px;
+        margin-left: 15%;
+    }
+    a.text{
+	margin-left: 19%;
+    }
+    .error{
+        top: 30.5%;
+    }
+    spam.x1{
+        height: 14px;
+        width: 14px;
+        font-size: 13px;
+    }
+    p.txt{
+        margin-top: -0.5px;
+    }
+    spam.x2{
+        top: 0px;
+    }
+}
+
+figcaption{
+	padding-top: 20px;
+}

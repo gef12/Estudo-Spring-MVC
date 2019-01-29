@@ -1,0 +1,40 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 16/10/2017, 23:39:42
+    Author     : lucas
+*/
+
+.OK h1{
+    width: 70%;
+    font-family: abel;
+    font-size: 22px;
+    top: 135px;
+    left: 75px;
+    position: absolute;
+}
+
+.OK button{
+    width: 5%;
+    font-family: abel;
+    font-size: 24px;
+    top: 185px;
+    left: 150px;
+    color: white;
+    position: absolute;
+    border: 0 none;
+    background-color: rgba(198, 40, 40, 1);
+}
+
+#menu:checked ~ .OK h1{
+    position: fixed;
+    left: 275px;
+}
+
+#menu:checked ~ .OK button{
+    position: fixed;
+    left: 350px;
+}

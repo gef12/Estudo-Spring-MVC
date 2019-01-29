@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/template/layout.xhtml" 
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="titulo">Minhas denúncias</ui:define>
+    <ui:define name="conteudo">
+        <h:form id="formulario">
+            <p:dataTable reflow="true" emptyMessage="Nenhuma denúncia foi encontrada." paginator="true" rows="20"
+                         value="#{minhasDenunciasBean.listaDenuncias}" var="indice" paginatorPosition="bottom" paginatorAlwaysVisible="false" style="margin-top: 20px;">
+
+                <p:column headerText="Data" width="150" style="text-align: center">
+                    <h:outputText value="#{minhasDenunciasBean.dataDenuncia(indice)}" >
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Status" width="200" sortBy="">
+                    <h:outputText value="#{minhasDenunciasBean.statusDenuncia(indice)}" />
+                </p:column>
+
+                <p:column headerText="Endereço" sortBy="">
+                    <h:outputText value="#{indice.local.endereco.logradouro}, #{indice.local.endereco.numero}, #{indice.local.endereco.bairro}, #{indice.local.endereco.cidade}, #{indice.local.endereco.cep} - #{indice.local.endereco.estado}" />
+                </p:column>
+                
+                <p:column headerText="" width="50" style="text-align: center;">
+                    <p:commandButton icon="ui-icon ui-icon-plus" alt="Mais informações" onclick="PF('maisInformacoes').show()" update="formulario:painel formulario:teste" >
+                        <f:setPropertyActionListener target="#{minhasDenunciasBean.denunciaSelecionada}" value="#{indice}" />
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+            
+            <p:dialog modal="true" widgetVar="maisInformacoes" id="maisInformacoes" maximizable="false" minimizable="false" closable="true" responsive="true" resizable="false">
+                <f:facet name="header">
+                    <h:outputText value="Detalhes da Denúncia" style="color: #2399e5" id="teste"/>
+                </f:facet>
+                <p:panelGrid columns="2" style="grid" id="painel" styleClass="ui-panelgrid-blank" columnClasses="rotulo campo">
+                    <p:outputLabel for="status" value="Status"/>
+                    <h:outputText value="#{minhasDenunciasBean.denunciaSelecionada.eventos.get(index).getStatus()}" id="status"/>
+                    
+                    <h:outputText />
+                    <h:outputText />
+                    
+                    <p:outputLabel for="logradouro" value="Logradouro"/>
+                    <h:outputText value="#{minhasDenunciasBean.denunciaSelecionada.local.endereco.logradouro}" id="logradouro"/>
+                    
+                    <p:outputLabel for="numero" value="Número"/>
+                    <h:outputText value="#{minhasDenunciasBean.denunciaSelecionada.local.endereco.numero}" id="numero"/>
+                    
+                    <p:outputLabel for="bairro" value="Bairro"/>
+                    <h:outputText value="#{minhasDenunciasBean.denunciaSelecionada.local.endereco.bairro}" id="bairro"/>
+                    
+                    <p:outputLabel for="cidade" value="Cidade"/>
+                    <h:outputText value="#{minhasDenunciasBean.denunciaSelecionada.local.endereco.cidade}" id="cidade"/>
+                    
+                    <p:outputLabel for="estado" value="Estado"/>
+                    <h:outputText value="#{minhasDenunciasBean.denunciaSelecionada.local.endereco.estado}" id="estado"/>
+                    
+                    <p:outputLabel for="cep" value="CEP"/>
+                    <h:outputText value="#{minhasDenunciasBean.denunciaSelecionada.local.endereco.cep}" id="cep"/>
+                    
+                    <h:outputText />
+                    <h:outputText />
+                    
+                    <p:outputLabel for="latitude" value="Latitude"/>
+                    <h:outputText value="#{minhasDenunciasBean.denunciaSelecionada.local.latitude}" id="latitude"/>
+                    
+                    <p:outputLabel for="longitude" value="Longitude"/>
+                    <h:outputText value="#{minhasDenunciasBean.denunciaSelecionada.local.longitude}" id="longitude"/>
+                    
+                    <p:outputLabel for="referencia" value="Referência"/>
+                    <h:outputText value="#{minhasDenunciasBean.denunciaSelecionada.local.referencia}" id="referencia"/>
+                    
+                    <p:outputLabel for="descricao" value="Descrição"/>
+                    <h:outputText value="#{minhasDenunciasBean.denunciaSelecionada.descricao}" id="descricao"/>
+                    
+                    <p:outputLabel for="visibilidade" value="Visibilidade"/>
+                    <h:outputText value="#{minhasDenunciasBean.denunciaSelecionada.visibilidade}" id="visibilidade"/>
+                    
+                </p:panelGrid>
+            </p:dialog>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

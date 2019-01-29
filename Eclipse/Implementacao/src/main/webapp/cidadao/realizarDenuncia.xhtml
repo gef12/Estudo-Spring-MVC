@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/template/layout.xhtml" 
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="titulo">Realizar Denúncia</ui:define>
+    <ui:define name="conteudo">
+        <h:form id="formulario">
+            <p:messages autoUpdate="true" closable="true"/>
+            <p:panel  header="Informe o endereço para verificação">
+                <div class="ui-grid ui-grid-responsive ui-fluid">
+                    <div class="ui-grid-row">
+                        <div class="ui-g-12 um-md-2 ui-lg-2">
+                            <p:outputLabel for="cep" value="CEP" styleClass="rotulo" />
+                            <p:inputMask mask="99999-999" id="cep" styleClass="campoEntrada" value="#{realizarDenunciaBean.local.endereco.cep}" >
+                                <p:ajax update="uf cidade endereco bairro" event="blur" listener="#{realizarDenunciaBean.buscaViaCep()}"/>
+                            </p:inputMask>
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-g-12 um-md-9 ui-lg-9">
+                            <p:outputLabel for="endereco" value="Rua" styleClass="rotulo" />
+                            <p:inputText id="endereco" styleClass="campoEntrada" value="#{realizarDenunciaBean.local.endereco.logradouro}" maxlength="45" />
+                        </div>
+                        <div class="ui-g-12 um-md-3 ui-lg-3">
+                            <p:outputLabel for="numero" value="Número" styleClass="rotulo" />
+                            <p:inputText id="numero" styleClass="campoEntrada" value="#{realizarDenunciaBean.local.endereco.numero}" maxlength="5" />
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-g-12 ui-md-7 ui-lg-4">
+                            <p:outputLabel for="bairro" value="Bairro" styleClass="rotulo" />
+                            <p:inputText id="bairro" styleClass="campoEntrada" value="#{realizarDenunciaBean.local.endereco.bairro}" maxlength="45" />
+                        </div>
+                        <div class="ui-g-12 ui-md-5 ui-lg-2" >
+                            <p:outputLabel for="uf" value="UF" styleClass="rotulo" />
+                            <p:inputText id="uf" styleClass="campoEntrada" value="#{realizarDenunciaBean.local.endereco.estado}" maxlength="45" disabled="true" />
+                        </div>
+                        <div class="ui-g-12 ui-md-7 ui-lg-4" >
+                            <p:outputLabel for="cidade" value="Cidade" styleClass="rotulo" />
+                            <p:inputText id="cidade"  styleClass="campoEntrada" value="#{realizarDenunciaBean.local.endereco.cidade}" maxlength="45" disabled="true" />
+                        </div>
+                        <div class="ui-g-12 ui-md-5 ui-lg-2">
+                            <br/>
+                            <p:commandButton value="Verificar" styleClass="botao" style="float: right"  action="#{realizarDenunciaBean.buscaEndereco()}" update="formulario:endossar formulario:criar"/>
+                        </div>
+                    </div>
+                </div>                        
+            </p:panel> 
+
+            <p:panel id="endossar" header="Denúncia já existente!" visible="#{realizarDenunciaBean.endossar}">
+                <div class="ui-grid ui-grid-responsive ui-fluid">
+                    <div class="ui-grid-row">
+                        <div class="ui-g-12 ui-md-12 ui-lg-12">
+                            <p:outputLabel for="consideracoes" value="Informações adicionais" styleClass="rotulo"/>
+                            <p:inputTextarea id="consideracoes" styleClass="campoEntrada"  style="margin-bottom: 10px;" value ="#{realizarDenunciaBean.informacaoEndossar}" />
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-g-12 ui-md-6 ui-lg-6">
+                            <p:commandButton value="Endossar." icon="fa fa-check" update="@all" action="#{realizarDenunciaBean.endossar()}" />
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-6">
+                            <p:commandButton value="Não, obrigado." icon="fa fa-close" onclick=""/>
+                        </div>
+                    </div>
+                </div>
+            </p:panel>
+
+            <p:panel id="criar" header="Informações adicionais (referência e  descrição do local e do fato)" visible="#{realizarDenunciaBean.criar}">
+                <div class="ui-grid ui-grid-responsive ui-fluid">
+                    <div class="ui-grid-row">
+                        <div class="ui-g-12 um-md-12 ui-lg-12">
+                            <p:outputLabel for="referencia" value="Referência" styleClass="rotulo" />
+                            <p:inputText id="referencia" styleClass="campoEntrada" maxlength="45" value="#{realizarDenunciaBean.local.referencia}"/>
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-g-12 um-md-12 ui-lg-12">
+                            <p:outputLabel for="informacoes" value="Informações adicionais" styleClass="rotulo" />
+                            <p:inputTextarea id="informacoes" styleClass="campoEntrada" maxlength="1000" value="#{realizarDenunciaBean.informacaoAdicional}"/>
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-g-12 ui-md-12 ui-lg-12">
+                            <p:gmap type="HYBRID" zoom="16"  center="-19.8863161,-44.4181941" style="width:100%;height:400px" >
+                                <p:ajax event="pointSelect" listener="#{realizarDenunciaBean.atualizarLocalizacao}" update="latitude longitude" />
+                            </p:gmap>
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-g-12 ui-md-4 ui-lg-4">
+                            <p:outputLabel for="latitude" value="Latitude" styleClass="rotulo" />
+                            <p:inputText id="latitude" value="#{realizarDenunciaBean.local.latitude}" styleClass="campoEntrada" />
+                        </div>
+                        <div class="ui-g-12 ui-md-4 ui-lg-4">
+                            <p:outputLabel for="longitude" value="Longitude" styleClass="rotulo" />
+                            <p:inputText id="longitude" value="#{realizarDenunciaBean.local.longitude}" styleClass="campoEntrada" />
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-g-12 ui-md-12 ui-lg-12">
+                            <br/>
+                            <p:commandButton value="Realizar Denúncia" styleClass="botao" style="float: right"  update="@all" action="#{realizarDenunciaBean.cadastrarDenuncia()}"/>
+                        </div>
+                    </div>
+                </div>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

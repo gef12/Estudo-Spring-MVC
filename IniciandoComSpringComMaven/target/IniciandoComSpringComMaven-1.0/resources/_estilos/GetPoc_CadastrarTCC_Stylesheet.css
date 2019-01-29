@@ -1,0 +1,110 @@
+@charset "utf-8";
+/* CSS Document */
+
+/**Área da página**/
+
+
+.form-control{
+    background-color: #e5e5e5;
+
+}
+input[type="text"]{
+    background-image: url("../_imagens/interrogacao.png");
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: #e5e5e5;
+}
+
+input[type="text"]:hover{
+    background-image: url("../_imagens/interrogacaoHover.png");
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: #e5e5e5;
+}
+
+input[type="text"]:focus{
+    background-color: #e5e5e5;
+}
+
+.resumo:focus{
+    background-color: #e5e5e5;
+}
+
+.resumo{
+    background-image: url("../_imagens/interrogacao.png");
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+.resumo:hover{
+    background-image: url("../_imagens/interrogacaoHover.png");
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+.bgcontainer{
+    width: auto;
+    height: auto;
+    transition: all .2s linear;
+}
+
+.tituloPagina{
+    font-family: Abel;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.tituloCampo{
+    font-family: abel;
+    font-size: 20px;
+}
+
+.btn_cancela{
+        border: 1pt solid #b70f0a;
+        border-radius: 5px;
+        width: 150px;
+        height: 50px;
+        font-family: Abel;
+        font-size: 20px;
+        font-weight: bold;
+        float: right;
+        background-color: white;
+}
+
+.btn_envia{
+        border: 1pt solid #b70f0a;
+        border-radius: 5px;
+        background-color: #b70f0a;
+        width: 150px;
+        height: 50px;
+        font-family: Abel;
+        font-weight: bold;
+        color: white;
+        font-size: 20px;
+}
+
+#menu:checked ~ .bgcontainer{
+	transform: translatex(200px);
+}
+
+.label{
+    width: 100%;
+}
+
+@media(max-width: 768px){
+    .bgcontainer{
+        margin-top: 45px;
+    }
+    .btn_cancela{
+        float: left;
+        margin-bottom: 15px;
+        margin-left: 30%;
+    }
+    .btn_envia{
+        float: left;
+        margin-left: 30%
+    }
+    #menu:checked ~ .bgcontainer{
+	transform: translatex(250px);
+    }
+}

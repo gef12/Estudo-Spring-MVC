@@ -1,0 +1,160 @@
+/* TOPBAR */
+.aw-topbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    min-height: 50px;
+    z-index: 3;
+
+    background-color: #1e94d2;
+}
+
+.aw-topbar > a img {
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+/* SIDEBAR */
+.aw-sidebar {
+    position: fixed;
+    top: 50px;
+    bottom: 0;
+    left: 0;
+    width: 210px;
+    margin-left: -211px;
+    z-index: 2;
+    transition: margin-left 0.5s;
+    overflow-y: auto;
+
+    background-color: #f6f6f6;
+    border-right: 1px solid #eaeaea;
+}
+
+.aw-sidebar.is-toggled {
+    margin-left: 0px;
+}
+
+@media (min-width: 960px) {
+    .aw-sidebar {
+        margin-left: 0px;
+    }
+
+    .aw-sidebar.is-toggled {
+        margin-left: -211px;
+    }
+}
+
+/* CONTENT */
+.aw-content {
+    padding: 0 15px;
+    margin-top: 50px;
+    transition: margin-left 0.5s;
+}
+
+@media (min-width: 960px) {
+    .aw-content {
+        margin-left: 210px;
+    }
+
+    .aw-content.is-toggled {
+        margin-left: 0;
+    }
+}
+
+/* RODAPÉ */
+.aw-duvida {
+    position: fixed;
+    bottom: 0;
+    width: 210px;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+/*PÁGINA DE ERRO*/
+.erro {
+    background-color: #fff;
+}
+
+.centralizado {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+
+    background-color: #fff;
+    box-shadow: 0px 0px 43px 7px rgba(87,86,87,1);
+}
+
+.erro > .centralizado > img {
+    width: 50%;
+    padding-top: 10%;
+}
+
+.erro > .centralizado > h1 {
+    color: #fe513f;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 2em; 
+}
+
+@media (min-width: 960px) {
+    .erro {
+        background-color: #fe513f;
+    }
+
+    .centralizado {
+        width: 25%;
+        margin-left: 37.5%;
+        margin-right: 37.5%;
+    }
+
+    .erro .centralizado > h1 {
+        font-size: 3em; 
+    }
+
+    .erro > .centralizado > img {
+        padding-top: 40%;
+    }
+}
+
+/*LOGIN*/
+.login {
+    background-color: #f6f6f6;
+}
+
+.login .ui-grid-row {
+    border: none;
+}
+
+.login .centralizado > img {
+    width: 60%;
+    padding-top: 10%;
+}
+
+.login input {
+    width: 80% !important;
+}
+
+@media (min-width: 960px) {
+    .login .centralizado > img {
+        width: 70%;
+        padding-top: 40%;
+    }
+}
+
+/*DADOS DO USUÁRIO*/
+
+.dadosUsuario {
+    width: 210px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.dadosUsuario > img {
+    width: 150px;
+    height: 150px;
+    border-radius: 150px;
+    -webkit-border-radius: 150px;
+    -moz-border-radius: 150px;
+}
